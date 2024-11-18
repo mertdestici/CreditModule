@@ -1,0 +1,55 @@
+openapi: "3.1.0"
+info:
+  title: "CreditModule API"
+  description: "CreditModule API"
+  version: "1.0.0"
+servers:
+  - url: "https://CreditModule"
+paths:
+  /customers:
+    post:
+      summary: "POST customers"
+      operationId: "createCustomer"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Customer"
+components:
+  schemas:
+    BigDecimal:
+      type: "object"
+      properties: { }
+    CreateCustomerRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        surname:
+          type: "string"
+        creditLimit:
+          $ref: "#/components/schemas/BigDecimal"
+        usedCreditLimit:
+          $ref: "#/components/schemas/BigDecimal"
+    Customer:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        surname:
+          type: "string"
+        creditLimit:
+          $ref: "#/components/schemas/BigDecimal"
+        usedCreditLimit:
+          $ref: "#/components/schemas/BigDecimal"
